@@ -8,7 +8,7 @@ export const useStage = (player, resetPlayer) => {
   useEffect(() => {
     setRowsCleared(0);
 
-    const sweep = newStage =>
+    const sweepRows = newStage =>
       newStage.reduce((ack, row) => {
         if (row.findIndex(cell => cell[0] === 0) === -1) {
           setRowsCleared(prev => prev + 1);
@@ -39,9 +39,8 @@ export const useStage = (player, resetPlayer) => {
       // Then check if we collided
       if (player.collided) {
         resetPlayer();
-        return sweep(newStage);
+        return sweepRows(newStage);
       }
-
       return newStage;
     };
 
