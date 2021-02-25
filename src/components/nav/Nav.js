@@ -24,13 +24,13 @@ const Nav = (props) => {
                 <a id="a" href="javascript:void(0)" class="dropbtn">{text.games}</a>
                 <div class="dropdown-content">
                     <a style={{ paddingTop: 0, paddingBottom: 0, height: 0, visibility: 'hidden' }}>{text.games}</a>
-                    <a href="/games/bird.html" style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>{text.bird}</a>
-                    <a href="/games/snake.html">{text.snake}</a>
-                    <a href="">{text.tetris}</a>
+                    <a href="/games/bird" style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>{text.bird}</a>
+                    <a href="/games/snake">{text.snake}</a>
+                    <a href="javascript:void(0)">{text.tetris}</a>
                 </div>
             </li>
             <li id="li"><a id="a" href="/lcd-character-generator.html">{text.lcd_character_generator}</a></li>
-            <li id="li"><a id="a" href="/#/movies" className="nav-link">{text.movies}</a></li>
+            <li id="li"><a id="a" href="#" className="nav-link">{text.movies}</a></li>
             {/*<li id="li" class="dropdown">
                 <a id="a" href="javascript:void(0)" class="dropbtn">{text.projects}</a>
                 <div class="dropdown-content">
