@@ -1,0 +1,36 @@
+export const tr = {
+    home: 'Anasayfa',
+    games: 'Oyunlar',
+    bird: 'Bird',
+    snake: 'Snake',
+    tetris: 'Tetris',
+    lcd_character_generator: 'LCD Karakter Hesaplayıcı',
+    movies: 'Filmler',
+    projects: 'Projeler',
+    tedbir: 'Tedbir App',
+    uav: 'Vatoz On7 (İHA)',
+    login_app: 'LogIn App',
+    latest_point: 'Latest Point',
+    omr: 'OMR',
+    piko_island: 'Piko Island',
+    about: 'Hakkında',
+    lang: 'TR'
+};
+export const en = {
+    home: 'Home',
+    games: 'Games',
+    bird: 'Bird',
+    snake: 'Snake',
+    tetris: 'Tetris',
+    lcd_character_generator: 'LCD Character Generator',
+    movies: 'Movies',
+    projects: 'Projects',
+    tedbir: 'Tedbir App',
+    uav: 'Vatoz On7 (UAV)',
+    login_app: 'LogIn App',
+    latest_point: 'Latest Point',
+    omr: 'OMR',
+    piko_island: 'Piko Island',
+    about: 'About',
+    lang: 'EN'
+};

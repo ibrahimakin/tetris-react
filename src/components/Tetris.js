@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { createStage, checkCollision } from '../gameHelpers';
+import { tr, en } from './lang';
+import { TR } from '../lang/types';
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
@@ -15,16 +17,27 @@ import { useGameStatus } from '../hooks/useGameStatus';
 import Stage from './Stage';
 import Display from './Display';
 import StartButton from './StartButton';
+import Nav from './nav/Nav';
 
-const Tetris = () => {
+
+const Tetris = (props) => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
-  const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
+  const [score, setScore, rows, setRows, level, setLevel, bestScore, maxRows] = useGameStatus(rowsCleared);
 
-  console.log('re-render');
+  //console.log('re-render');
+
+  const [text, setText] = useState(en);
+  
+  useEffect(() => {
+    if (props.lang === TR) {
+      setText(tr);
+    }
+    else { setText(en); }
+  }, [props.lang]);
 
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -56,7 +69,7 @@ const Tetris = () => {
     } else {
       // Game Over
       if (player.pos.y < 1) {
-        console.log('GAME OVER!!!');
+        //console.log('GAME OVER!!!');
         setGameOver(true);
         setDropTime(null);
       }
@@ -67,14 +80,14 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        console.log("interval on")
+        //console.log("interval on")
         setDropTime(1000 / (level + 1) + 200);
       }
     }
   };
 
   const dropPlayer = () => {
-    console.log("interval off")
+    //console.log("interval off")
     setDropTime(null);
     drop();
   };
@@ -104,19 +117,22 @@ const Tetris = () => {
       onKeyDown={e => move(e)}
       onKeyUp={keyUp}
     >
+      <Nav setLangStorage={props.setLangStorage} lang={props.lang} />
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
           {gameOver ? (
-            <Display gameOver={gameOver} text="Game Over" />
+            <Display gameOver={gameOver} text={text.game_over} />
           ) : (
               <div>
-                <Display text={`Score: ${score}`} />
-                <Display text={`Rows: ${rows}`} />
-                <Display text={`Level: ${level}`} />
+                <Display text={`${text.best_score}: ${bestScore}`} />
+                <Display text={`${text.score}: ${score}`} />
+                <Display text={`${text.max_rows}: ${maxRows}`} />
+                <Display text={`${text.rows}: ${rows}`} />
+                <Display text={`${text.level}: ${level}`} />
               </div>
             )}
-          <StartButton callback={startGame} />
+          <StartButton callback={startGame} text={text.start_game} />
         </aside>
       </StyledTetris>
     </StyledTetrisWrapper>
