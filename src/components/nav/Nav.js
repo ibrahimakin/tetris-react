@@ -29,8 +29,8 @@ const Nav = (props) => {
                     <a href="javascript:void(0)">{text.tetris}</a>
                 </div>
             </li>
-            <li id="li"><a id="a" href="/lcd-character-generator.html">{text.lcd_character_generator}</a></li>
-            <li id="li"><a id="a" href="#" className="nav-link">{text.movies}</a></li>
+            <li id="li"><a id="a" href="/projects/lcd-character-generator">{text.lcd_character_generator}</a></li>
+            <li id="li"><a id="a" href="/projects/movies" className="nav-link">{text.movies}</a></li>
             {/*<li id="li" class="dropdown">
                 <a id="a" href="javascript:void(0)" class="dropbtn">{text.projects}</a>
                 <div class="dropdown-content">
