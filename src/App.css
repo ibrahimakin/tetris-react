@@ -1,33 +1,30 @@
 .App {
+  background: url('./img/bg.png') #000;
+  background-size: cover;
+}
+#mobile-controler {
+  display: none;
   text-align: center;
+  position: fixed;
+  bottom: 0;
+  padding: 25px;
+  right: unset;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+#mobile-controler button {
+  padding: 15px;
+  margin: 5px;
+  cursor: pointer;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 450px) {
+  #mobile-controler {
+    left: 0;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width: 700px) {
+  #mobile-controler {
+    display: inline;
+    right: 0;
   }
 }

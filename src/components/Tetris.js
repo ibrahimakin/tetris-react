@@ -119,7 +119,9 @@ const Tetris = (props) => {
     >
       <Nav setLangStorage={props.setLangStorage} lang={props.lang} />
       <StyledTetris>
-        <Stage stage={stage} />
+        <div style={{minHeight:'80vmin', minWidth:`${80*(stage[0].length/stage.length)}vmin`, height:'80vmin', width:`${80*(stage[0].length/stage.length)}vmin`}}>
+          <Stage stage={stage} />
+        </div>
         <aside>
           {gameOver ? (
             <Display gameOver={gameOver} text={text.game_over} />
@@ -135,6 +137,15 @@ const Tetris = (props) => {
           <StartButton callback={startGame} text={text.start_game} />
         </aside>
       </StyledTetris>
+      <div id="mobile-controler">
+        <button onClick={()=>{move({keyCode:38})}}>A</button>
+        <div>
+        <button onClick={()=>{move({keyCode:37})}}>B</button>
+        <button onClick={()=>{move({keyCode:38})}}>C</button>
+        <button onClick={()=>{move({keyCode:39})}}>D</button>
+        </div>
+        <button onClick={()=>{move({keyCode:40})}}>E</button>
+      </div>
     </StyledTetrisWrapper>
   );
 };

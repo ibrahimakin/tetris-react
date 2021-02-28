@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Tetris from './components/Tetris';
 import { TR, EN } from './lang/types';
+import './App.css'
 
 const App = () => {
   const [lang, setLang] = useState(EN);
