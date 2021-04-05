@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledTetrisWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: auto;
 `;
 
@@ -12,7 +12,6 @@ export const StyledTetris = styled.div`
   padding: 35px;
   margin: 0 auto;
   max-width: 900px;
-
   aside {
     width: 100%;
     max-width: 200px;

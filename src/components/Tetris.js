@@ -17,8 +17,6 @@ import { useGameStatus } from '../hooks/useGameStatus';
 import Stage from './Stage';
 import Display from './Display';
 import StartButton from './StartButton';
-import Nav from './nav/Nav';
-
 
 const Tetris = (props) => {
   const [dropTime, setDropTime] = useState(null);
@@ -117,7 +115,6 @@ const Tetris = (props) => {
       onKeyDown={e => move(e)}
       onKeyUp={keyUp}
     >
-      <Nav setLangStorage={props.setLangStorage} lang={props.lang} />
       <StyledTetris>
         <div style={{minHeight:'80vmin', minWidth:`${80*(stage[0].length/stage.length)}vmin`, height:'80vmin', width:`${80*(stage[0].length/stage.length)}vmin`}}>
           <Stage stage={stage} />
@@ -137,15 +134,6 @@ const Tetris = (props) => {
           <StartButton callback={startGame} text={text.start_game} />
         </aside>
       </StyledTetris>
-      <div id="mobile-controler">
-        <button onClick={()=>{move({keyCode:38})}}>A</button>
-        <div>
-        <button onClick={()=>{move({keyCode:37})}}>B</button>
-        <button onClick={()=>{move({keyCode:38})}}>C</button>
-        <button onClick={()=>{move({keyCode:39})}}>D</button>
-        </div>
-        <button onClick={()=>{move({keyCode:40})}}>E</button>
-      </div>
     </StyledTetrisWrapper>
   );
 };

@@ -1,30 +1,5 @@
 .App {
-  background: url('./img/bg.png') #000;
+  background: url('https://raw.githubusercontent.com/ibrahimakin/ibrahimAKIN.github.io/master/assets/images/games/tetris/bg.png') #000;
   background-size: cover;
-}
-#mobile-controler {
-  display: none;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  padding: 25px;
-  right: unset;
-}
-
-#mobile-controler button {
-  padding: 15px;
-  margin: 5px;
-  cursor: pointer;
-}
-@media screen and (max-width: 450px) {
-  #mobile-controler {
-    left: 0;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  #mobile-controler {
-    display: inline;
-    right: 0;
-  }
+  height: 100%;
 }
