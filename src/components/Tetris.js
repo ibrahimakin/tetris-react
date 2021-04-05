@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { createStage, checkCollision } from '../gameHelpers';
-import { tr, en } from './lang';
-import { TR } from '../lang/types';
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
@@ -24,18 +22,7 @@ const Tetris = (props) => {
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
-  const [score, setScore, rows, setRows, level, setLevel, bestScore, maxRows] = useGameStatus(rowsCleared);
-
-  //console.log('re-render');
-
-  const [text, setText] = useState(en);
-  
-  useEffect(() => {
-    if (props.lang === TR) {
-      setText(tr);
-    }
-    else { setText(en); }
-  }, [props.lang]);
+  const [score, setScore, rows, setRows, level, setLevel, highScore, maxRows] = useGameStatus(rowsCleared);
 
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -120,18 +107,18 @@ const Tetris = (props) => {
           <Stage stage={stage} />
         </div>
         <aside>
-          {gameOver ? (
-            <Display gameOver={gameOver} text={text.game_over} />
+          { gameOver ? (
+            <Display gameOver={gameOver} text={'game_over'} />
           ) : (
-              <div>
-                <Display text={`${text.best_score}: ${bestScore}`} />
-                <Display text={`${text.score}: ${score}`} />
-                <Display text={`${text.max_rows}: ${maxRows}`} />
-                <Display text={`${text.rows}: ${rows}`} />
-                <Display text={`${text.level}: ${level}`} />
-              </div>
-            )}
-          <StartButton callback={startGame} text={text.start_game} />
+            <div>
+              <Display text={`${'best_score'}: ${highScore}`} />
+              <Display text={`${'score'}: ${score}`} />
+              <Display text={`${'max_rows'}: ${maxRows}`} />
+              <Display text={`${'rows'}: ${rows}`} />
+              <Display text={`${'level'}: ${level}`} />
+            </div>
+          )}
+          <StartButton callback={startGame} text={'start_game'} />
         </aside>
       </StyledTetris>
     </StyledTetrisWrapper>
