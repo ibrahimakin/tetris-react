@@ -46,13 +46,9 @@ const Tetris = (props) => {
     setLevel(0);
   };
 
-  const handleResume = () => {
-    setPaused(false);
-  }
+  const handleResume = () => { setPaused(false); }
 
-  const handlePause = () => {
-    setPaused(true);
-  }
+  const handlePause = () => { setPaused(true); }
 
   const drop = () => {
     // Increase level when player has cleared 10 rows
@@ -77,9 +73,10 @@ const Tetris = (props) => {
     }
   };
 
-  const keyUp = ({ keyCode }) => {
+  const keyUp = (e) => {
+    e.preventDefault();
     if (!gameOver) {
-      if (keyCode === 40) {
+      if (e.keyCode === 40) {
         setDropTime(1000 / (level + 1) + 200);
       }
     }
@@ -90,12 +87,13 @@ const Tetris = (props) => {
     drop();
   };
 
-  const move = ({ keyCode }) => {
+  const move = (e) => {
+    e.preventDefault();
     if (!gameOver) {
-      if (keyCode === 37) { movePlayer(-1); } 
-      else if (keyCode === 39) { movePlayer(1); }
-      else if (keyCode === 40) { dropPlayer(); }
-      else if (keyCode === 38) {
+      if (e.keyCode === 37) { movePlayer(-1); } 
+      else if (e.keyCode === 39) { movePlayer(1); }
+      else if (e.keyCode === 40) { dropPlayer(); }
+      else if (e.keyCode === 38) {
         if (!paused) { playerRotate(stage, 1); }
       }
     }
