@@ -3,7 +3,7 @@ export const langObjTetris = {
         score: 'Skor',
         rows: 'Rows',
         level: 'Seviye',
-        start_game: 'Oyuna Basla',
+        start_game: 'Basla',
         game_over: 'Oyun Bitti',
         high_score: 'En Yüksek Skor',
         max_rows: 'Max Rows',
