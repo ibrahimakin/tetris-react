@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import { createStage, checkCollision } from '../gameHelpers';
+import { getLangTetris } from '../helpers';
+import { langObjTetris } from '../lang';
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
@@ -23,6 +25,8 @@ const Tetris = (props) => {
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel, highScore, maxRows] = useGameStatus(rowsCleared);
+
+  let lang = getLangTetris();
 
   const movePlayer = dir => {
     if (!paused && !checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -64,7 +68,6 @@ const Tetris = (props) => {
       } else {
         // Game Over
         if (player.pos.y < 1) {
-          //console.log('GAME OVER!!!');
           setGameOver(true);
           setStarted(false);
           setDropTime(null);
@@ -77,37 +80,28 @@ const Tetris = (props) => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        //console.log("interval on")
         setDropTime(1000 / (level + 1) + 200);
       }
     }
   };
 
   const dropPlayer = () => {
-    //console.log("interval off")
     setDropTime(null);
     drop();
   };
 
   const move = ({ keyCode }) => {
     if (!gameOver) {
-      if (keyCode === 37) {
-        movePlayer(-1);
-      } else if (keyCode === 39) {
-        movePlayer(1);
-      } else if (keyCode === 40) {
-        dropPlayer();
-      } else if (keyCode === 38) {
-        if (!paused) {
-          playerRotate(stage, 1);
-        }
+      if (keyCode === 37) { movePlayer(-1); } 
+      else if (keyCode === 39) { movePlayer(1); }
+      else if (keyCode === 40) { dropPlayer(); }
+      else if (keyCode === 38) {
+        if (!paused) { playerRotate(stage, 1); }
       }
     }
   };
 
-  useInterval(() => {
-    drop();
-  }, dropTime);
+  useInterval(() => { drop(); }, dropTime);
 
   return (
     <StyledTetrisWrapper
@@ -122,20 +116,20 @@ const Tetris = (props) => {
         </div>
         <aside>
           { gameOver ? (
-            <div className="styled-display gameover"><span lang-tag="game_over">Game Over</span></div>
+            <div className="styled-display gameover"><span lang-tag="game_over">{langObjTetris[lang]['game_over']}</span></div>
           ) : (
             <div>
-              <div className="styled-display"><span lang-tag="high_score">High Score</span>{`: ${highScore}`}</div>
-              <div className="styled-display"><span lang-tag="score">Score</span>{`: ${score}`}</div>
-              <div className="styled-display"><span lang-tag="max_rows">Max Rows</span>{`: ${maxRows}`}</div>
-              <div className="styled-display"><span lang-tag="rows">Rows</span>{`: ${rows}`}</div>
-              <div className="styled-display"><span lang-tag="level">Level</span>{`: ${level}`}</div>
+              <div className="styled-display"><span lang-tag="high_score">{langObjTetris[lang]['high_score']}</span>{`: ${highScore}`}</div>
+              <div className="styled-display"><span lang-tag="score">{langObjTetris[lang]['score']}</span>{`: ${score}`}</div>
+              <div className="styled-display"><span lang-tag="max_rows">{langObjTetris[lang]['max_rows']}</span>{`: ${maxRows}`}</div>
+              <div className="styled-display"><span lang-tag="rows">{langObjTetris[lang]['rows']}</span>{`: ${rows}`}</div>
+              <div className="styled-display"><span lang-tag="level">{langObjTetris[lang]['level']}</span>{`: ${level}`}</div>
             </div>
           )}
           <button className="styled-button" onClick={startGame}><span lang-tag="start_game">Start Game</span></button>
           { started ? (paused ?
-            <button className="styled-button" onClick={handleResume}><span lang-tag="resume_game">Resume Game</span></button>:
-            <button className="styled-button" onClick={handlePause}><span lang-tag="pause_game">Pause Game</span></button>) : null
+            <button className="styled-button" onClick={handleResume}><span lang-tag="resume_game">{langObjTetris[lang]['resume_game']}</span></button>:
+            <button className="styled-button" onClick={handlePause}><span lang-tag="pause_game">{langObjTetris[lang]['pause_game']}</span></button>) : null
           }
         </aside>
       </StyledTetris>
