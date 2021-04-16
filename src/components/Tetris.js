@@ -124,7 +124,7 @@ const Tetris = (props) => {
               <div className="styled-display"><span lang-tag="level">{langObjTetris[lang]['level']}</span>{`: ${level}`}</div>
             </div>
           )}
-          <button className="styled-button" onClick={startGame}><span lang-tag="start_game">Start Game</span></button>
+          <button className="styled-button" onClick={startGame}><span lang-tag="start_game">Start</span></button>
           { started ? (paused ?
             <button className="styled-button" onClick={handleResume}><span lang-tag="resume_game">{langObjTetris[lang]['resume_game']}</span></button>:
             <button className="styled-button" onClick={handlePause}><span lang-tag="pause_game">{langObjTetris[lang]['pause_game']}</span></button>) : null
