@@ -1,5 +1,5 @@
 export const langObjTetris = {
-    tr : {
+    tr: {
         score: 'Skor',
         rows: 'Rows',
         level: 'Seviye',
