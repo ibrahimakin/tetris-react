@@ -1,4 +1,6 @@
 export function getLangTetris() {
-    let localLang = localStorage.getItem('lang');
+    let localLang;
+    try { localLang = localStorage.getItem('lang'); }
+    catch (e) { }
     return localLang ? JSON.parse(localLang) : 'en';
 }
