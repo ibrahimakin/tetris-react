@@ -17,7 +17,8 @@ export const useGameStatus = rowsCleared => {
                 let newScore = prev + linePoints[rowsCleared - 1] * (level + 1);
                 if (newScore > highScore) {
                     setHighScore(newScore);
-                    localStorage.setItem('tetrisHighScore', newScore);
+                    try { localStorage.setItem('tetrisHighScore', newScore); }
+                    catch (e) { }
                 }
                 return newScore;
             });
@@ -25,7 +26,8 @@ export const useGameStatus = rowsCleared => {
                 let newRows = prev + rowsCleared;
                 if (newRows > maxRows) {
                     setMaxRows(newRows);
-                    localStorage.setItem('tetrisMaxRows', maxRows);
+                    try { localStorage.setItem('tetrisMaxRows', maxRows); }
+                    catch (error) { }
                 }
                 return newRows;
             });
@@ -33,15 +35,16 @@ export const useGameStatus = rowsCleared => {
     }, [level, linePoints, rowsCleared]);
 
     useEffect(() => {
-        let best = localStorage.getItem('tetrisHighScore');
+        let best, row;
+        try {
+            best = localStorage.getItem('tetrisHighScore');
+            row = localStorage.getItem('tetrisMaxRows');
+        } catch (e) { }
         if (best) { setHighScore(parseInt(best)); }
-        let row = localStorage.getItem('tetrisMaxRows');
         if (row) { setMaxRows(parseInt(row)); }
-    }, [])
+    }, []);
 
-    useEffect(() => {
-        calcScore();
-    }, [calcScore, rowsCleared, score]);
+    useEffect(() => { calcScore(); }, [calcScore, rowsCleared, score]);
 
     return [score, setScore, rows, setRows, level, setLevel, highScore, maxRows];
 };
