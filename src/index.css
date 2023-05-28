@@ -1,12 +1,60 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-#root {
-  height: 100%;
-}
 @font-face {
-  font-family: 'Pixel';
-  src: url('./font/Pixel-LCD-7.woff') format('woff');
+    font-family: 'Pixel';
+    src: url(font/Pixel-LCD-7.woff) format('woff');
+}
+
+body {
+    background: url(img/bg.png) #000;
+    background-size: cover;
+}
+
+#sidenav .main div>span {
+    font-family: Pixel;
+    line-height: 18px;
+    font-size: 11px;
+}
+
+.styled-display {
+    margin-bottom: 20px;
+    padding: 16px;
+    color: #999;
+    font-size: .8rem;
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: #000;
+    border: 4px solid #333;
+    font-family: Pixel, Arial, Helvetica, sans-serif;
+}
+
+.gameover {
+    color: #f00;
+}
+
+.styled-button {
+    display: block;
+    padding: 12px;
+    width: 100%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    font-size: .9rem;
+    overflow: hidden;
+    background-color: #333;
+    border: 4px outset #666;
+    font-family: Pixel, Arial, Helvetica, sans-serif;
+}
+
+.filled {
+    border-radius: 0;
+    background-color: #ddd;
+    border: 8px outset #fff;
+}
+
+.styled-button:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.filled:active, #collapse:active+.filled, .pin-menu:active+.filled,
+button.styled-button:active {
+    border-style: inset;
 }
