@@ -1,13 +1,13 @@
 export const lang_tetris = {
     tr: {
         score: 'Skor',
-        rows: 'Rows',
+        rows: 'Satir',
         level: 'Seviye',
         start_game: 'Basla',
         reset_game: 'Sifirla',
         game_over: 'Oyun Bitti',
         high_score: 'En Yuksek Skor',
-        max_rows: 'Max Rows',
+        max_rows: 'Maks. Satir',
         pause_game: 'Duraklat',
         resume_game: 'Devam Et'
     },

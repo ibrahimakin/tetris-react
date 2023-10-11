@@ -14,34 +14,91 @@ body {
     font-size: 11px;
 }
 
-.styled-display {
+#root, #root>div>div:last-child, aside>div {
+    display: flex;
+}
+
+#root>div {
+    display: grid;
+    grid-template-columns: auto minmax(0, auto);
+    justify-content: left;
+    margin: auto;
+    outline: none;
+}
+
+#root>div>div:first-child {
+    display: grid;
+    grid-gap: 1px;
+    grid-template-rows: repeat(20, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+    border: 4px solid #333;
+    background-color: #111;
+    min-height: 187px;
+    min-width: 115px;
+    height: 80vmin;
+    width: 48vmin;
+}
+
+#root>div>div:last-child {
+    max-width: 100%;
+    width: 300px;
+}
+
+aside {
+    min-width: 0;
+    margin-left: 20px;
+    height: 485px;
+}
+
+aside>div {
     margin-bottom: 20px;
-    padding: 16px;
+    padding: 15px 0;
     color: #999;
     font-size: .8rem;
     overflow: hidden;
-    white-space: nowrap;
     background-color: #000;
     border: 4px solid #333;
     font-family: Pixel, Arial, Helvetica, sans-serif;
+}
+
+aside>div>span {
+    padding-top: 2px;
+}
+
+aside>button,
+aside>div>span:first-child {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.gameover,
+aside>div>span:first-child>span {
+    padding-left: 16px;
+}
+
+aside>div>span:last-child {
+    padding-right: 16px;
 }
 
 .gameover {
     color: #f00;
 }
 
-.styled-button {
-    display: block;
-    padding: 12px;
+aside>button {
+    padding: 12px 0;
     width: 100%;
     color: #fff;
     outline: none;
     cursor: pointer;
     font-size: .9rem;
-    overflow: hidden;
     background-color: #333;
     border: 4px outset #666;
     font-family: Pixel, Arial, Helvetica, sans-serif;
+}
+
+aside>button:not(:last-child) {
+    margin-bottom: 20px;
 }
 
 .filled {
@@ -50,11 +107,7 @@ body {
     border: 8px outset #fff;
 }
 
-.styled-button:not(:last-child) {
-    margin-bottom: 20px;
-}
-
 .filled:active, #collapse:active+.filled, .pin-menu:active+.filled,
-button.styled-button:active {
+aside>button:active {
     border-style: inset;
 }

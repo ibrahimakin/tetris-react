@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { createStage, checkCollision } from '../helper';
 import { lang_tetris, getLangTetris } from '../lang';
 
-// Styled Components
-import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
-
 // Custom Hooks
 import { useInterval } from '../hooks/useInterval';
 import { usePlayer } from '../hooks/usePlayer';
@@ -24,7 +21,7 @@ const Tetris = () => {
     const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
     const [score, setScore, rows, setRows, level, setLevel, highScore, maxRows] = useGameStatus(rowsCleared);
 
-    let lang = getLangTetris();
+    const lang = getLangTetris();
 
     const movePlayer = dir => {
         if (!paused && !checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -87,46 +84,44 @@ const Tetris = () => {
             if (e.keyCode === 37) movePlayer(-1);
             else if (e.keyCode === 39) movePlayer(1);
             else if (e.keyCode === 40) dropPlayer();
-            else if (e.keyCode === 38) {
-                if (!paused) playerRotate(stage, 1);
-            }
+            else if (e.keyCode === 38 && !paused) playerRotate(stage, 1);
         }
     };
 
     useInterval(drop, dropTime);
 
     return (
-        <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={move} onKeyUp={keyUp}>
-            <StyledTetris>
-                <Stage stage={stage} />
+        <div role="button" tabIndex="0" onKeyDown={move} onKeyUp={keyUp}>
+            <Stage stage={stage} />
+            <div>
                 <aside>
                     {gameOver ?
-                        <div className="styled-display gameover"><span lang-tag="game_over">{lang_tetris[lang]['game_over']}</span></div> :
+                        <div><span className="gameover" lang-tag="game_over">{lang_tetris[lang]['game_over']}</span></div> :
                         <>
-                            <div className="styled-display"><span lang-tag="high_score">{lang_tetris[lang]['high_score']}</span>{`: ${highScore}`}</div>
-                            <div className="styled-display"><span lang-tag="score">{lang_tetris[lang]['score']}</span>{`: ${score}`}</div>
-                            <div className="styled-display"><span lang-tag="max_rows">{lang_tetris[lang]['max_rows']}</span>{`: ${maxRows}`}</div>
-                            <div className="styled-display"><span lang-tag="rows">{lang_tetris[lang]['rows']}</span>{`: ${rows}`}</div>
-                            <div className="styled-display"><span lang-tag="level">{lang_tetris[lang]['level']}</span>{`: ${level}`}</div>
+                            <div><span><span lang-tag="high_score">{lang_tetris[lang]['high_score']}</span></span>: <span>{highScore}</span></div>
+                            <div><span><span lang-tag="score">{lang_tetris[lang]['score']}</span></span>: <span>{score}</span></div>
+                            <div><span><span lang-tag="max_rows">{lang_tetris[lang]['max_rows']}</span></span>: <span>{maxRows}</span></div>
+                            <div><span><span lang-tag="rows">{lang_tetris[lang]['rows']}</span></span>: <span>{rows}</span></div>
+                            <div><span><span lang-tag="level">{lang_tetris[lang]['level']}</span></span>: <span>{level}</span></div>
                         </>
                     }
                     {started &&
-                        <button className="styled-button" onClick={() => setPaused(!paused)}>
+                        <button onClick={() => setPaused(!paused)}>
                             {paused ?
                                 <span lang-tag="resume_game">{lang_tetris[lang]['resume_game']}</span> :
                                 <span lang-tag="pause_game">{lang_tetris[lang]['pause_game']}</span>
                             }
                         </button>
                     }
-                    <button className="styled-button" onClick={startGame}>
+                    <button onClick={startGame}>
                         {started ?
                             <span lang-tag="reset_game">{lang_tetris[lang]['reset_game']}</span> :
                             <span lang-tag="start_game">{lang_tetris[lang]['start_game']}</span>
                         }
                     </button>
                 </aside>
-            </StyledTetris>
-        </StyledTetrisWrapper>
+            </div>
+        </div>
     );
 };
 
