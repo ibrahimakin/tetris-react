@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import Tetris from './components/Tetris';
 import * as serviceWorker from './serviceWorker';
