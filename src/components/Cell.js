@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { TETROMINOS } from '../helper';
 import styled from 'styled-components';
 
@@ -13,4 +13,4 @@ const StyledCell = styled.div`
 
 const Cell = ({ type }) => <StyledCell type={type} color={TETROMINOS[type].color} />;
 
-export default React.memo(Cell);
+export default memo(Cell);

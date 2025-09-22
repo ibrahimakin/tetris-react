@@ -59,6 +59,7 @@ aside>div {
     background-color: #000;
     border: 4px solid #333;
     font-family: Pixel, Arial, Helvetica, sans-serif;
+    line-height: 13px;
 }
 
 aside>div>span {
@@ -97,8 +98,12 @@ aside>button {
     font-family: Pixel, Arial, Helvetica, sans-serif;
 }
 
+aside>button {
+    margin-top: 4px;
+}
+
 aside>button:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .filled {

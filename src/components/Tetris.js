@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createStage, checkCollision } from '../helper';
 import { lang_tetris, getLangTetris } from '../lang';
 
@@ -95,17 +95,14 @@ const Tetris = () => {
             <Stage stage={stage} />
             <div>
                 <aside>
+                    <div><span><span lang-tag="high_score">{lang_tetris[lang]['high_score']}</span></span>: <span>{highScore}</span></div>
+                    <div><span><span lang-tag="score">{lang_tetris[lang]['score']}</span></span>: <span>{score}</span></div>
+                    <div><span><span lang-tag="max_rows">{lang_tetris[lang]['max_rows']}</span></span>: <span>{maxRows}</span></div>
+                    <div><span><span lang-tag="rows">{lang_tetris[lang]['rows']}</span></span>: <span>{rows}</span></div>
+                    <div><span><span lang-tag="level">{lang_tetris[lang]['level']}</span></span>: <span>{level}</span></div>
                     {gameOver ?
                         <div><span className="gameover" lang-tag="game_over">{lang_tetris[lang]['game_over']}</span></div> :
-                        <>
-                            <div><span><span lang-tag="high_score">{lang_tetris[lang]['high_score']}</span></span>: <span>{highScore}</span></div>
-                            <div><span><span lang-tag="score">{lang_tetris[lang]['score']}</span></span>: <span>{score}</span></div>
-                            <div><span><span lang-tag="max_rows">{lang_tetris[lang]['max_rows']}</span></span>: <span>{maxRows}</span></div>
-                            <div><span><span lang-tag="rows">{lang_tetris[lang]['rows']}</span></span>: <span>{rows}</span></div>
-                            <div><span><span lang-tag="level">{lang_tetris[lang]['level']}</span></span>: <span>{level}</span></div>
-                        </>
-                    }
-                    {started &&
+                        started &&
                         <button onClick={() => setPaused(!paused)}>
                             {paused ?
                                 <span lang-tag="resume_game">{lang_tetris[lang]['resume_game']}</span> :
