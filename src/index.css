@@ -86,9 +86,8 @@ aside>div>span:last-child {
     color: #f00;
 }
 
+.controls button,
 aside>button {
-    padding: 12px 0;
-    width: 100%;
     color: #fff;
     outline: none;
     cursor: pointer;
@@ -99,11 +98,40 @@ aside>button {
 }
 
 aside>button {
+    padding: 12px 0;
+    width: 100%;
     margin-top: 4px;
 }
 
 aside>button:not(:last-child) {
     margin-bottom: 22px;
+}
+
+.controls {
+    position: fixed;
+    bottom: 20px;
+    right: 70px;
+    width: 60px;
+}
+
+.controls button {
+    user-select: none;
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+}
+
+.controls button:nth-child(odd) {
+    position: absolute;
+    top: 60px;
+}
+
+.controls button:nth-child(1) {
+    right: 60px;
+}
+
+.controls button:nth-child(3) {
+    left: 60px;
 }
 
 .filled {
@@ -113,6 +141,27 @@ aside>button:not(:last-child) {
 }
 
 .filled:active, #collapse:active+.filled, .pin-menu:active+.filled,
-aside>button:active {
+aside>button:active, .controls button:active {
     border-style: inset;
+}
+
+@media screen and ((max-width: 450px) or (max-height: 450px)) {
+    #root>div>div:last-child {
+        width: 200px;
+    }
+
+    aside>div {
+        font-size: .6rem;
+        padding: 10px 0;
+        margin-bottom: 10px;
+    }
+
+    aside>button {
+        padding: 8px 0;
+        margin-top: 2px;
+    }
+
+    aside>button:not(:last-child) {
+        margin-bottom: 12px;
+    }
 }

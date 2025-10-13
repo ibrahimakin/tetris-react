@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { createStage, checkCollision } from '../helper';
 import { lang_tetris, getLangTetris } from '../lang';
 
@@ -16,6 +16,8 @@ const Tetris = () => {
     const [gameOver, setGameOver] = useState(false);
     const [started, setStarted] = useState(false);
     const [paused, setPaused] = useState(false);
+    const interval = useRef();
+    const board = useRef();
 
     const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
     const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -67,7 +69,7 @@ const Tetris = () => {
     const keyUp = e => {
         e.preventDefault();
         if (!gameOver) {
-            if (e.keyCode === 40) {
+            if (e.keyCode === 40 || e.target.value === '40') {
                 setDropTime(1000 / (level + 1) + 200);
             }
         }
@@ -88,10 +90,32 @@ const Tetris = () => {
         }
     };
 
+    const startAction = e => {
+        const value = e.target.value;
+        let handled = false;
+        const initiate = new KeyboardEvent('keydown', { keyCode: value, bubbles: true });
+        board.current.dispatchEvent(initiate);
+        interval.current = setInterval(() => {
+            if (handled) {
+                const event = new KeyboardEvent('keydown', { keyCode: value, bubbles: true });
+                board.current.dispatchEvent(event);
+            }
+            handled = true;
+        }, 80);
+    }
+
+    const stopAction = e => {
+        clearInterval(interval.current);
+        e.preventDefault = () => {};
+        keyUp(e);
+    }
+
+    const showControls = () => board.current.lastChild.lastChild.removeAttribute('style');
+
     useInterval(drop, dropTime);
 
     return (
-        <div role="button" tabIndex="0" onKeyDown={move} onKeyUp={keyUp}>
+        <div ref={board} role="button" tabIndex="0" onKeyDown={move} onKeyUp={keyUp}>
             <Stage stage={stage} />
             <div>
                 <aside>
@@ -110,13 +134,19 @@ const Tetris = () => {
                             }
                         </button>
                     }
-                    <button onClick={startGame}>
+                    <button onClick={startGame} onTouchEnd={showControls}>
                         {started ?
                             <span lang-tag="reset_game">{lang_tetris[lang]['reset_game']}</span> :
                             <span lang-tag="start_game">{lang_tetris[lang]['start_game']}</span>
                         }
                     </button>
                 </aside>
+                <div className="controls" style={{ display: 'none' }}>
+                    <button value={37} onTouchStart={startAction} onTouchEnd={stopAction} onTouchCancel={stopAction}>&larr;</button>
+                    <button value={38} onTouchStart={startAction} onTouchEnd={stopAction} onTouchCancel={stopAction}>&#8634;</button>
+                    <button value={39} onTouchStart={startAction} onTouchEnd={stopAction} onTouchCancel={stopAction}>&rarr;</button>
+                    <button value={40} onTouchStart={startAction} onTouchEnd={stopAction} onTouchCancel={stopAction}>&darr;</button>
+                </div>
             </div>
         </div>
     );
