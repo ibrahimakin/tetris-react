@@ -8,6 +8,10 @@ body {
     background-size: cover;
 }
 
+.ns {
+    --clr: #fff;
+}
+
 #sidenav .main div>span {
     font-family: Pixel;
     line-height: 18px;
